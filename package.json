@@ -1,0 +1,21 @@
+{
+  "name": "OneCommandManageMent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist",
+    "test": "ts-node src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Migan178/OneCommand_ManageMent.git"
+  },
+  "keywords": [],
+  "author": "Migan",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Migan178/OneCommand_ManageMent/issues"
+  },
+  "homepage": "https://github.com/Migan178/OneCommand_ManageMent#readme"
+}
