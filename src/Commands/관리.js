@@ -15,24 +15,40 @@ module.exports = class extends SlashCommand {
         .addChoice('밴', '밴')
         .addChoice('청소', '청소')
         .addChoice('슬로우모드', '슬로우모드')
-        .addChoice('타임아웃', '타임아웃')
     )
-    .addMentionableOption(options => options.setName('유저').setRequired(false))
-    .addStringOption(options => options.setName('이유').setRequired(false))
-    .addNumberOption(options => options.setName('갯수').setRequired(false))
-    .addNumberOption(options => options.setName('초').setRequired(false))
+    .addMentionableOption(options =>
+      options.setName('유저').setDescription('유저').setRequired(false)
+    )
+    .addStringOption(options =>
+      options
+        .setName('이유')
+        .setDescription('밴이나 킥을 당한이유')
+        .setRequired(false)
+    )
+    .addNumberOption(options =>
+      options
+        .setName('갯수')
+        .setDescription('삭제할 채팅갯수')
+        .setRequired(false)
+    )
+    .addNumberOption(options =>
+      options
+        .setName('초')
+        .setDescription('슬로우 모드를 설정할 초')
+        .setRequired(false)
+    )
   /**
    *
    * @param {CommandInteraction} interaction
    * @param {Slash} slash
    */
-  execute(interaction, slash) {
+  async execute(interaction, slash) {
     const 항목 = interaction.options.getString('항목')
 
     if (항목 === '킥') {
       if (
         !interaction.guild.members.cache
-          .get(interaction.author.id)
+          .get(interaction.user.id)
           .permissions.has('KICK_MEMBERS')
       )
         return interaction.reply({
@@ -57,7 +73,7 @@ module.exports = class extends SlashCommand {
       try {
         유저.kick(이유)
         interaction.reply({
-          content: `${유저.tag}님을 킥했습니다.`,
+          content: `${유저.user.tag}님을 킥했습니다.`,
           ephemeral: true,
         })
       } catch (error) {
@@ -70,7 +86,7 @@ module.exports = class extends SlashCommand {
     } else if (항목 === '밴') {
       if (
         !interaction.guild.members.cache
-          .get(interaction.author.id)
+          .get(interaction.user.id)
           .permissions.has('BAN_MEMBERS')
       )
         return interaction.reply({
@@ -95,7 +111,7 @@ module.exports = class extends SlashCommand {
       try {
         유저.ban({ reason: 이유 })
         interaction.reply({
-          content: `${유저.tag}님을 밴했습니다.`,
+          content: `${유저.user.tag}님을 밴했습니다.`,
           ephemeral: true,
         })
       } catch (error) {
@@ -108,7 +124,7 @@ module.exports = class extends SlashCommand {
     } else if (항목 === '청소') {
       if (
         !interaction.guild.members.cache
-          .get(interaction.author.id)
+          .get(interaction.user.id)
           .permissions.has('MANAGE_MESSAGES')
       )
         return interaction.reply({
@@ -156,6 +172,12 @@ module.exports = class extends SlashCommand {
           ephemeral: true,
         })
 
+      if (interaction.options.getNumber('초') > 21600)
+        return interaction.reply({
+          content: '슬로우모드는 6시간 이하만 가능해요',
+          ephemeral: true,
+        })
+
       interaction.channel.setRateLimitPerUser(
         interaction.options.getNumber('초')
       )
@@ -165,7 +187,6 @@ module.exports = class extends SlashCommand {
           '초'
         )}초로 설정했습니다.`
       )
-    } else if (항목 === '타임아웃') {
     }
   }
 }
