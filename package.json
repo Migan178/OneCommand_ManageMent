@@ -1,11 +1,10 @@
 {
-  "name": "OneCommandManageMent",
+  "name": "onecommandmanagement",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "제2회 한국 디스코드 리스트 해커톤에 나갈 봇입니다.",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node dist",
-    "test": "ts-node src"
+    "start": "node src"
   },
   "repository": {
     "type": "git",
@@ -17,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/Migan178/OneCommand_ManageMent/issues"
   },
-  "homepage": "https://github.com/Migan178/OneCommand_ManageMent#readme"
+  "homepage": "https://github.com/Migan178/OneCommand_ManageMent#readme",
+  "dependencies": {
+    "@discordjs/builders": "^0.10.0",
+    "discommand-slash": "^2.0.0",
+    "discord.js": "^13.4.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
 }
