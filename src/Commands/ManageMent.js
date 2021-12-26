@@ -43,9 +43,9 @@ module.exports = class extends SlashCommand {
    * @param {Slash} slash
    */
   async execute(interaction, slash) {
-    const 항목 = interaction.options.getString('항목')
+    const choice = interaction.options.getString('항목')
 
-    if (항목 === '킥') {
+    if (choice === '킥') {
       if (
         !interaction.guild.members.cache
           .get(interaction.user.id)
@@ -61,19 +61,19 @@ module.exports = class extends SlashCommand {
           content: '제게 킥하기 권한이 없습니다.',
           ephemeral: true,
         })
-      const 유저 = interaction.options.getMentionable('유저')
+      const user = interaction.options.getMentionable('유저')
       const 이유 = interaction.options.getString('이유')
 
-      if (!유저.kickable)
+      if (!user.kickable)
         return interaction.reply({
           content: '유저를 킥할 수 없습니다.',
           ephemeral: true,
         })
 
       try {
-        유저.kick(이유)
+        user.kick(이유)
         interaction.reply({
-          content: `${유저.user.tag}님을 킥했습니다.`,
+          content: `${user.user.tag}님을 킥했습니다.`,
           ephemeral: true,
         })
       } catch (error) {
@@ -83,7 +83,7 @@ module.exports = class extends SlashCommand {
           ephemeral: true,
         })
       }
-    } else if (항목 === '밴') {
+    } else if (choice === '밴') {
       if (
         !interaction.guild.members.cache
           .get(interaction.user.id)
@@ -99,19 +99,19 @@ module.exports = class extends SlashCommand {
           content: '제게 밴하기 권한이 없습니다.',
           ephemeral: true,
         })
-      const 유저 = interaction.options.getMentionable('유저')
+      const user = interaction.options.getMentionable('유저')
       const 이유 = interaction.options.getString('이유')
 
-      if (!유저.banable)
+      if (!user.banable)
         return interaction.reply({
           content: '유저를 킥할 수 없습니다.',
           ephemeral: true,
         })
 
       try {
-        유저.ban({ reason: 이유 })
+        user.ban({ reason: 이유 })
         interaction.reply({
-          content: `${유저.user.tag}님을 밴했습니다.`,
+          content: `${user.user.tag}님을 밴했습니다.`,
           ephemeral: true,
         })
       } catch (error) {
@@ -121,7 +121,7 @@ module.exports = class extends SlashCommand {
           ephemeral: true,
         })
       }
-    } else if (항목 === '청소') {
+    } else if (choice === '청소') {
       if (
         !interaction.guild.members.cache
           .get(interaction.user.id)
@@ -155,7 +155,7 @@ module.exports = class extends SlashCommand {
             ephemeral: true,
           })
         })
-    } else if (항목 === '슬로우모드') {
+    } else if (choice === '슬로우모드') {
       if (
         !interaction.guild.members.cache
           .get(interaction.user.id)
