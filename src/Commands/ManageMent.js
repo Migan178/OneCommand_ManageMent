@@ -190,3 +190,4 @@ module.exports = class extends SlashCommand {
     }
   }
 }
+// 힘들었어요

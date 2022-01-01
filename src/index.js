@@ -14,5 +14,5 @@ client.login(TOKEN)
 command.LoadCommand()
 
 client.on('ready', () => {
-  console.log(`${client.user.username} is Ready!`)
+  console.log(`${client.user.username} 해커톤 나갈 준비 완료!`)
 })
