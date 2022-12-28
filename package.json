@@ -1,6 +1,6 @@
 {
   "name": "onecommandmanagement",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "제2회 한국 디스코드 리스트 해커톤에 나갈 봇입니다.",
   "main": "src/index.js",
   "scripts": {
@@ -19,10 +19,11 @@
   "homepage": "https://github.com/Migan178/OneCommand_ManageMent#readme",
   "dependencies": {
     "@discordjs/builders": "^0.6.0",
-    "discommand-slash": "^2.0.0",
-    "discord.js": "^13.5.0"
+    "discommand": "^6.0.2",
+    "discord.js": "^13.12.0"
   },
   "devDependencies": {
-    "prettier": "^2.5.1"
+    "@migan/prettier-config": "^1.0.0",
+    "prettier": "^2.8.1"
   }
 }

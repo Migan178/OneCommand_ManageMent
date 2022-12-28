@@ -1,12 +1,14 @@
-const { SlashCommand } = require('discommand-slash')
+const { Command } = require('discommand')
 const { SlashCommandBuilder } = require('@discordjs/builders')
 const { MessageEmbed, Formatters } = require('discord.js')
 
-module.exports = class extends SlashCommand {
-  data = new SlashCommandBuilder()
-    .setName('도움말')
-    .setDescription('이봇의 도움말 입니다.')
-  execute(interaction, slash) {
+module.exports = class extends Command {
+  constructor() {
+    super()
+    this.name = '도움말'
+    this.description = '이봇의 도움말 입니다.'
+  }
+  execute(interaction) {
     interaction.reply({
       embeds: [
         new MessageEmbed().setTitle('도움말').setDescription(

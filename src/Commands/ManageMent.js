@@ -1,48 +1,70 @@
-const { SlashCommand, Slash } = require('discommand-slash')
+const { Command } = require('discommand')
 const { SlashCommandBuilder } = require('@discordjs/builders')
-const { CommandInteraction } = require('discord.js')
+const {
+  CommandInteraction,
+  ApplicationCommandOptionData,
+} = require('discord.js')
 
-module.exports = class extends SlashCommand {
-  data = new SlashCommandBuilder()
-    .setName('관리')
-    .setDescription('관리기능입니다.')
-    .addStringOption(options =>
-      options
-        .setName('항목')
-        .setDescription('항목을 고릅니다.')
-        .setRequired(true)
-        .addChoice('킥', '킥')
-        .addChoice('밴', '밴')
-        .addChoice('청소', '청소')
-        .addChoice('슬로우모드', '슬로우모드')
-    )
-    .addMentionableOption(options =>
-      options.setName('유저').setDescription('유저').setRequired(false)
-    )
-    .addStringOption(options =>
-      options
-        .setName('이유')
-        .setDescription('밴이나 킥을 당한이유')
-        .setRequired(false)
-    )
-    .addNumberOption(options =>
-      options
-        .setName('갯수')
-        .setDescription('삭제할 채팅갯수')
-        .setRequired(false)
-    )
-    .addNumberOption(options =>
-      options
-        .setName('초')
-        .setDescription('슬로우 모드를 설정할 초')
-        .setRequired(false)
-    )
+module.exports = class extends Command {
+  constructor() {
+    super()
+    this.name = '관리'
+    this.description = '관리기능입니다.'
+    /**
+     * @type {ApplicationCommandOptionData[]}
+     */
+    this.options = [
+      {
+        type: 'STRING',
+        name: '항목',
+        description: '항목을 고릅니다.',
+        choices: [
+          {
+            name: '킥',
+            value: '킥',
+          },
+          {
+            name: '밴',
+            value: '밴',
+          },
+          {
+            name: '청소',
+            value: '청소',
+          },
+          {
+            name: '슬로우모드',
+            value: '슬로우모드',
+          },
+        ],
+        required: true,
+      },
+      {
+        type: 'USER',
+        name: '유저',
+        description: '유저',
+      },
+      {
+        type: 'STRING',
+        name: '이유',
+        description: '밴이나 킥을 당한이유',
+      },
+      {
+        type: 'NUMBER',
+        name: '갯수',
+        description: '삭제할 채팅갯수',
+      },
+      {
+        type: 'NUMBER',
+        name: '초',
+        description: '슬로우 모드를 설정할 초',
+      },
+    ]
+  }
   /**
    *
    * @param {CommandInteraction} interaction
-   * @param {Slash} slash
    */
-  async execute(interaction, slash) {
+  async execute(interaction) {
     const choice = interaction.options.getString('항목')
 
     if (choice === '킥') {

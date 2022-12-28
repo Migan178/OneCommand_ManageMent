@@ -1,8 +1,12 @@
-const { SlashCommand } = require('discommand-slash')
+const { Command } = require('discommand')
 const { SlashCommandBuilder } = require('@discordjs/builders')
 
-module.exports = class extends SlashCommand {
-  data = new SlashCommandBuilder().setName('ping').setDescription('Pong!')
+module.exports = class extends Command {
+  constructor() {
+    super()
+    this.name = 'ping'
+    this.description = 'Pong!'
+  }
   execute(interaction, slash) {
     interaction.reply(`현재핑: \`${interaction.client.ws.ping}\`ms`)
   }
