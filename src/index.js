@@ -16,4 +16,9 @@ client.login(TOKEN)
 
 client.on('ready', () => {
   console.log(`${client.user.username} 해커톤 나갈 준비 완료!`)
+  const changeStatus = () => {
+    client.user.setActivity({ type: 'LISTENING', name: '/도움말' })
+  }
+  changeStatus()
+  setInterval(changeStatus, 10000)
 })
