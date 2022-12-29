@@ -1,19 +1,19 @@
+const { DiscommandClient, LoadType } = require('discommand')
 const { TOKEN } = require('../config.json')
-const { DiscommandClient } = require('discommand')
-const path = require('path')
+const { join } = require('path')
+const { GatewayIntentBits } = require('discord.js')
 const client = new DiscommandClient(
   {
-    intents: ['GUILDS'],
+    intents: [GatewayIntentBits.Guilds],
   },
   {
-    CommandHandlerDirectory: path.join(__dirname, 'Commands'),
-    loadType: 'FILE',
+    directory: {
+      command: join(__dirname, 'Commands'),
+      listener: join(__dirname, 'Events'),
+    },
+    loadType: LoadType.File,
   }
 )
 
 client.loadAll()
 client.login(TOKEN)
-
-client.on('ready', () => {
-  console.log(`${client.user.username} 해커톤 나갈 준비 완료!`)
-})

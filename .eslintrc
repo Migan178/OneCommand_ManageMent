@@ -1,0 +1,13 @@
+{
+  "root": true,
+  "plugins": ["prettier"],
+  "extends": ["prettier"],
+  "env": {
+    "node": true,
+    "es6": true,
+    "commonjs": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
+  }
+}

@@ -1,8 +1,9 @@
 const { Command } = require('discommand')
-const { SlashCommandBuilder } = require('@discordjs/builders')
 const {
-  CommandInteraction,
+  ChatInputCommandInteraction,
   ApplicationCommandOptionData,
+  ApplicationCommandOptionType,
+  PermissionsBitField,
 } = require('discord.js')
 
 module.exports = class extends Command {
@@ -15,7 +16,7 @@ module.exports = class extends Command {
      */
     this.options = [
       {
-        type: 'STRING',
+        type: ApplicationCommandOptionType.String,
         name: '항목',
         description: '항목을 고릅니다.',
         choices: [
@@ -39,22 +40,22 @@ module.exports = class extends Command {
         required: true,
       },
       {
-        type: 'USER',
+        type: ApplicationCommandOptionType.User,
         name: '유저',
         description: '유저',
       },
       {
-        type: 'STRING',
+        type: ApplicationCommandOptionType.String,
         name: '이유',
         description: '밴이나 킥을 당한이유',
       },
       {
-        type: 'NUMBER',
+        type: ApplicationCommandOptionType.Number,
         name: '갯수',
         description: '삭제할 채팅갯수',
       },
       {
-        type: 'NUMBER',
+        type: ApplicationCommandOptionType.Number,
         name: '초',
         description: '슬로우 모드를 설정할 초',
       },
@@ -62,7 +63,7 @@ module.exports = class extends Command {
   }
   /**
    *
-   * @param {CommandInteraction} interaction
+   * @param {ChatInputCommandInteraction} interaction
    */
   async execute(interaction) {
     const choice = interaction.options.getString('항목')
@@ -71,14 +72,16 @@ module.exports = class extends Command {
       if (
         !interaction.guild.members.cache
           .get(interaction.user.id)
-          .permissions.has('KICK_MEMBERS')
+          .permissions.has(PermissionsBitField.KickMembers)
       )
         return interaction.reply({
           content: '님에게 킥하기 권한이 없습니다.',
           ephemeral: true,
         })
 
-      if (!interaction.guild.me.permissions.has('KICK_MEMBERS'))
+      if (
+        !interaction.guild.me.permissions.has(PermissionsBitField.KickMembers)
+      )
         return interaction.reply({
           content: '제게 킥하기 권한이 없습니다.',
           ephemeral: true,
@@ -109,14 +112,14 @@ module.exports = class extends Command {
       if (
         !interaction.guild.members.cache
           .get(interaction.user.id)
-          .permissions.has('BAN_MEMBERS')
+          .permissions.has(PermissionsBitField.BanMembers)
       )
         return interaction.reply({
           content: '님에게 밴하기 권한이 없습니다.',
           ephemeral: true,
         })
 
-      if (!interaction.guild.me.permissions.has('BAN_MEMBERS'))
+      if (!interaction.guild.me.permissions.has(PermissionsBitField.BanMembers))
         return interaction.reply({
           content: '제게 밴하기 권한이 없습니다.',
           ephemeral: true,
@@ -147,14 +150,18 @@ module.exports = class extends Command {
       if (
         !interaction.guild.members.cache
           .get(interaction.user.id)
-          .permissions.has('MANAGE_MESSAGES')
+          .permissions.has(PermissionsBitField.ManageMessages)
       )
         return interaction.reply({
           content: '님에게 메세지 관리하기 권한이 없습니다.',
           ephemeral: true,
         })
 
-      if (!interaction.guild.me.permissions.has('MANAGE_MESSAGES'))
+      if (
+        !interaction.guild.me.permissions.has(
+          PermissionsBitField.ManageMessages
+        )
+      )
         return interaction.reply({
           content: '제게 메세지 관리하기 권한이 없습니다.',
           ephemeral: true,
@@ -181,14 +188,18 @@ module.exports = class extends Command {
       if (
         !interaction.guild.members.cache
           .get(interaction.user.id)
-          .permissions.has('MANAGE_CHANNELS')
+          .permissions.has(PermissionsBitField.ManageChannels)
       )
         return interaction.reply({
           content: '님에게 채널 관리하기 권한이 없습니다.',
           ephemeral: true,
         })
 
-      if (!interaction.guild.me.permissions.has('MANAGE_CHANNELS'))
+      if (
+        !interaction.guild.me.permissions.has(
+          PermissionsBitField.ManageChannels
+        )
+      )
         return interaction.reply({
           content: '제게 채널 관리하기 권한이 없습니다.',
           ephemeral: true,

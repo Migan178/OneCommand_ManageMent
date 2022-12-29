@@ -1,7 +1,7 @@
 {
   "name": "onecommandmanagement",
-  "version": "1.1.0",
-  "description": "제2회 한국 디스코드 리스트 해커톤에 나갈 봇입니다.",
+  "version": "2.0.0-dev",
+  "description": "제2회 한국 디스코드 리스트 해커톤에 나갔던 봇입니다.",
   "main": "src/index.js",
   "scripts": {
     "start": "node src"
@@ -11,19 +11,21 @@
     "url": "git+https://github.com/Migan178/OneCommand_ManageMent.git"
   },
   "keywords": [],
-  "author": "Migan",
+  "author": "Migan178 <migan9857@gmail.com>",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/Migan178/OneCommand_ManageMent/issues"
   },
   "homepage": "https://github.com/Migan178/OneCommand_ManageMent#readme",
   "dependencies": {
-    "@discordjs/builders": "^0.6.0",
-    "discommand": "^6.0.2",
-    "discord.js": "^13.12.0"
+    "discommand": "^10.0.0",
+    "discord.js": "^14.7.1"
   },
   "devDependencies": {
     "@migan/prettier-config": "^1.0.0",
+    "eslint": "^8.30.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.1"
   }
 }
