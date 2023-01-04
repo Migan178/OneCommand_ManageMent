@@ -1,13 +1,27 @@
 {
   "root": true,
-  "plugins": ["prettier"],
-  "extends": ["prettier"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
   "env": {
     "node": true,
-    "es6": true,
-    "commonjs": true
+    "es6": true
   },
   "parserOptions": {
     "ecmaVersion": 2020
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx", ".js"]
+    },
+    "import/resolver": {
+      "typescript": "./tsconfig.json"
+    }
+  },
+  "rules": {
+    "@typescript-eslint/no-non-null-assertion": "off"
   }
 }

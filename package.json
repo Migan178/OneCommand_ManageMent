@@ -2,9 +2,11 @@
   "name": "onecommandmanagement",
   "version": "2.0.0-dev",
   "description": "제2회 한국 디스코드 리스트 해커톤에 나갔던 봇입니다.",
-  "main": "src/index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "node src"
+    "start": "node dist",
+    "build": "tsc",
+    "dev": "ts-node src"
   },
   "repository": {
     "type": "git",
@@ -18,14 +20,20 @@
   },
   "homepage": "https://github.com/Migan178/OneCommand_ManageMent#readme",
   "dependencies": {
-    "discommand": "^10.0.0",
-    "discord.js": "^14.7.1"
+    "discommand": "^11.0.2",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3"
   },
   "devDependencies": {
     "@migan/prettier-config": "^1.0.0",
-    "eslint": "^8.30.0",
-    "eslint-config-prettier": "^8.5.0",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.1"
+    "prettier": "^2.8.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
   }
 }

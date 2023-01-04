@@ -1,17 +1,16 @@
-const { Command } = require('discommand')
-const { ChatInputCommandInteraction } = require('discord.js')
+import { ChatInputCommandInteraction } from 'discord.js'
+import { Command } from 'discommand'
 
 module.exports = class extends Command {
   constructor() {
-    super()
-    this.name = '도움말'
-    this.description = '이봇의 도움말 입니다.'
+    super('도움말')
+    this.data = {
+      name: '도움말',
+      description: '이봇의 도움말 입니다.',
+    }
   }
-  /**
-   *
-   * @param {ChatInputCommandInteraction} interaction
-   */
-  execute(interaction) {
+
+  execute(interaction: ChatInputCommandInteraction) {
     interaction.reply({
       embeds: [
         {
